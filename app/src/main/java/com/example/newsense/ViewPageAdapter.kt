@@ -1,5 +1,4 @@
 package com.example.newsense
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -8,36 +7,30 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.viewpager.widget.PagerAdapter
 
+class ViewPagerAdapter(private val context: Context, private val sliderItems: List<SliderItems>) :
+    PagerAdapter() {
 
-class ViewPageAdapter(context: Context, sliderItems: List<SliderItems>) : PagerAdapter() {
-    var sliderItems: List<SliderItems>
-    var mlayoutInflater: LayoutInflater
-    var context: Context = context
-
-    init {
-        this.context = context
-        this.sliderItems = sliderItems
-        mlayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-    }
-
+    private val mLayoutInflater: LayoutInflater =
+        context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
     override fun getCount(): Int {
         return sliderItems.size
     }
 
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view === `object` as LinearLayout
+    override fun isViewFromObject(view: View, obj: Any): Boolean {
+        return view == obj as LinearLayout
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val itemview:View = mlayoutInflater.inflate(R.layout.item_container, container, false)
-        val imageView = itemview.findViewById<ImageView>(R.id.imageView)
+        val itemView = mLayoutInflater.inflate(R.layout.item_container, container, false)
+        val imageView = itemView.findViewById<ImageView>(R.id.imageView)
         imageView.setImageResource(sliderItems[position].image)
-        container.addView(imageView)
-        return itemview
+
+        container.addView(itemView)
+        return itemView
     }
 
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as LinearLayout)
+    override fun destroyItem(container: ViewGroup, position: Int, obj: Any) {
+        container.removeView(obj as LinearLayout)
     }
 }

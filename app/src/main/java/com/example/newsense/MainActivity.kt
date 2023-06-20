@@ -1,13 +1,11 @@
 package com.example.newsense
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-
+import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
-
     // Create a list of type SliderItems
-    val sliderItems = mutableListOf<SliderItems>()
+    private val sliderItems: MutableList<SliderItems> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,10 +13,16 @@ class MainActivity : AppCompatActivity() {
 
         val verticalViewPager = findViewById<VerticalViewPager>(R.id.verticalViewPager)
 
-        sliderItems.add(SliderItems(R.drawable.ic_launcher_background))
-        sliderItems.add(SliderItems(R.drawable.ic_launcher_background))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
+        sliderItems.add(SliderItems(R.drawable.tesla))
         sliderItems.add(SliderItems(R.drawable.ic_launcher_background))
 
-        verticalViewPager.adapter = ViewPageAdapter(this, sliderItems)
+        verticalViewPager.adapter = ViewPagerAdapter(this@MainActivity, sliderItems)
     }
 }
